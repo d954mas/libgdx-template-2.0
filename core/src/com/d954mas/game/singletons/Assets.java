@@ -18,21 +18,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Assets implements AssetErrorListener {
-    private static final Assets instance = new Assets();
+    public static final Assets instance = new Assets();
     private AssetManager manager;
     private Assets(){
-        manager=new AssetManager();
+    }
+
+    public void init(AssetManager manager){
+        Gdx.app.log("Assets","init");
+        this.manager=manager;
         manager.setErrorListener(this);
         FileHandleResolver resolver = new InternalFileHandleResolver();
         manager.setLoader(FreeTypeFontGenerator.class,
                 new FreeTypeFontGeneratorLoader(resolver));
     }
 
-    public static void loadUI(){
+    public void preLoad(){
         SkinLoader ldr = new GeneratedFontSkinLoader( new InternalFileHandleResolver(), instance.initFonts());
         instance.manager.setLoader(Skin.class, ldr);
         instance.manager.load("ui/uiskin.json", Skin.class);
         instance.manager.finishLoading();
+        Gdx.app.log("Assets","---------------");
+        Gdx.app.log("Assets","preLoad");
+        logAssetsInfo();
+        Gdx.app.log("Assets","---------------");
 
     }
 
@@ -40,7 +48,6 @@ public class Assets implements AssetErrorListener {
         Gdx.app.debug("GeneratedFontSkinLoader", "Loading fonts...");
         FileHandle fontFile = Gdx.files.internal("ui/default-font.ttf");
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
-
         Map<String,BitmapFont> fontsByName = new HashMap<>();
         FreeTypeFontGenerator.FreeTypeFontParameter param = new FreeTypeFontGenerator.FreeTypeFontParameter();
         float ppi = Gdx.graphics.getPpiY();
@@ -49,17 +56,24 @@ public class Assets implements AssetErrorListener {
         param.size = Math.round( ppi / 3);
         fontsByName.put("big-font", generator.generateFont(param));
         param.size = Math.round( ppi / 4);
-        fontsByName.put( "default-font", generator.generateFont( param ));
+        fontsByName.put("default-font", generator.generateFont(param));
         generator.dispose();
         return fontsByName;
     }
 
 
-    public static void loadAll(){
+    public void loadAll(){
+        Gdx.app.log("Assets","---------------");
+        Gdx.app.log("Assets","preLoad");
+        //add Loading here
+
+
+        logAssetsInfo();
+        Gdx.app.log("Assets","---------------");
 
     }
 
-    public static void dispose() {
+    public void dispose() {
         instance.manager.dispose();
     }
 

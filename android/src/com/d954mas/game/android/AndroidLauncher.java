@@ -1,12 +1,10 @@
 package com.d954mas.game.android;
 
 import android.os.Bundle;
-
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.utils.OrderedMap;
-import com.d954mas.game.MyGame;
+import com.d954mas.game.EsqGame;
 import com.d954mas.game.services.Service;
 import com.d954mas.game.services.iface.NativeApiService;
 public class AndroidLauncher extends AndroidApplication {
@@ -21,6 +19,6 @@ public class AndroidLauncher extends AndroidApplication {
             @Override
             public void init() {}
         });
-		initialize(new MyGame(services), config);
+		initialize(new EsqGame(services), config);
 	}
 }

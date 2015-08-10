@@ -2,7 +2,7 @@ package com.d954mas.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.d954mas.game.MyGame;
+import com.d954mas.game.EsqGame;
 import com.d954mas.game.screens.events.Consumer1;
 import com.d954mas.game.screens.events.EsqEvent;
 
@@ -13,14 +13,15 @@ import java.util.Map;
 
 import static java.lang.String.format;
 
-public abstract class MyScreen implements Screen {
+public abstract class EsqScreen implements Screen {
 
+    //Function that describe all events
     protected abstract Map<String, Class<EsqEvent>> initInnerEventTypes();
     protected InnerEventModel innerEventModel;
 
     @Override
     public void show() {
-        MyGame.getStage().clear();
+        EsqGame.getStage().clear();
         Gdx.app.debug(this.getClass().getSimpleName(),"show");
     }
 
@@ -49,7 +50,7 @@ public abstract class MyScreen implements Screen {
         Gdx.app.debug(this.getClass().getSimpleName(),"dispose");
     }
 
-    public MyScreen(){
+    public EsqScreen(){
         innerEventModel = new InnerEventModel();
     }
 

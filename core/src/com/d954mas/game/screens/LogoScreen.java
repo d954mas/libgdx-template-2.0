@@ -1,14 +1,13 @@
 package com.d954mas.game.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.d954mas.game.screens.events.EsqEvent;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class LogoScreen extends MyScreen {
+public class LogoScreen extends EsqScreen {
     @Override
     public void show() {
         super.show();

@@ -1,17 +1,16 @@
 package com.d954mas.game.singletons;
 
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.OrderedMap;
-import com.d954mas.game.MyGame;
+import com.d954mas.game.EsqGame;
 import com.d954mas.game.screens.LogoScreen;
 
 public class Screens {
 
 
-    private static Screens instance;
+    public static Screens instance=new Screens();
     private  OrderedMap<Class<? extends Screen>,Screen> screens;
-    private MyGame game;
+    private EsqGame game;
     private Screens(){
 
     }
@@ -20,27 +19,23 @@ public class Screens {
         screens.put(LogoScreen.class,new LogoScreen());
     }
 
-    public static void dispose() {
+    public void dispose() {
         for(Screen screen:instance.screens.values()){
-            screen.hide();
-            screen.pause();
             screen.dispose();
         }
     }
 
-    public static void init(MyGame game){
-        if(instance!=null){
+    public void init(EsqGame game){
+        if(instance.screens!=null){
             throw new RuntimeException("Screens must be initialize once");
         }
-        instance=new Screens();
         instance.screens=new OrderedMap<>();
         instance.game=game;
         instance.createScreens();
     }
 
 
-
-    public static void setScreen(Class clazz){
+    public void setScreen(Class clazz){
         instance.game.setScreen(instance.screens.get(clazz));
     }
 

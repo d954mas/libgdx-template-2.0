@@ -2,9 +2,8 @@ package com.d954mas.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import com.badlogic.gdx.utils.OrderedMap;
-import com.d954mas.game.MyGame;
+import com.d954mas.game.EsqGame;
 import com.d954mas.game.services.Service;
 import com.d954mas.game.services.iface.NativeApiService;
 
@@ -22,6 +21,6 @@ public class DesktopLauncher {
 			}
 		});
 
-		new LwjglApplication(new MyGame(services), config);
+		new LwjglApplication(new EsqGame(services), config);
 	}
 }
