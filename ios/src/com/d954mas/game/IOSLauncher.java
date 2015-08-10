@@ -9,7 +9,7 @@ public class IOSLauncher extends IOSApplication.Delegate {
     @Override
     protected IOSApplication createApplication() {
         IOSApplicationConfiguration config = new IOSApplicationConfiguration();
-        return new IOSApplication(new EsqGame(), config);
+        return new IOSApplication(new EsqGame(null), config);
     }
 
     public static void main(String[] argv) {
