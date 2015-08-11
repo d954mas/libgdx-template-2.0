@@ -44,6 +44,7 @@ public class EsqGame extends Game {
         Screens.instance.init(this);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Screens.instance.setScreen(LogoScreen.class);
+        Gdx.app.log("","");
        // List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
       //  numbers.forEach(value -> System.out.println(value));
     }
