@@ -1,6 +1,7 @@
 apply plugin: "java"
+apply plugin: 'me.tatarka.retrolambda'
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 sourceSets.main.java.srcDirs = [ "src/" ]
@@ -10,6 +11,11 @@ eclipse.project {
     name = appName + "-core"
 }
 
-task packAtlases{
-    group 'pack'
+retrolambda {
+    jdk System.getenv("JAVA8_HOME")
+    oldJdk System.getenv("JAVA7_HOME")
+    javaVersion JavaVersion.VERSION_1_7
+    defaultMethods true
+    incremental false
 }
+

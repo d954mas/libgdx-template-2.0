@@ -14,7 +14,21 @@ android {
 
         instrumentTest.setRoot('tests')
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
+
+retrolambda {
+    jdk System.getenv("JAVA8_HOME")
+    oldJdk System.getenv("JAVA7_HOME")
+    javaVersion JavaVersion.VERSION_1_7
+    defaultMethods true
+    incremental false
+}
+
+
 
 
 // called every time gradle gets executed, takes the native dependencies of
