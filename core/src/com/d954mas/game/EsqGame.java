@@ -38,10 +38,10 @@ public class EsqGame extends Game {
         Services.init();
         Assets.instance.init(new AssetManager());
         Assets.instance.preLoad();
+        Screens.instance.init(this);
         stage=new Stage();
         Gdx.input.setInputProcessor(stage);
-        perfomanceLogger=new PerfomanceLogger();
-        Screens.instance.init(this);
+        perfomanceLogger=new PerfomanceLogger();;
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Screens.instance.setScreen(LogoScreen.class);
     }

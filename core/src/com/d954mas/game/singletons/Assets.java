@@ -23,6 +23,10 @@ public class Assets implements AssetErrorListener {
     private Assets(){
     }
 
+    public AssetManager getManager() {
+        return manager;
+    }
+
     public void init(AssetManager manager){
         Gdx.app.log("Assets","init");
         this.manager=manager;
@@ -66,8 +70,6 @@ public class Assets implements AssetErrorListener {
         Gdx.app.log("Assets","---------------");
         Gdx.app.log("Assets","preLoad");
         //add Loading here
-
-
         logAssetsInfo();
         Gdx.app.log("Assets","---------------");
 
