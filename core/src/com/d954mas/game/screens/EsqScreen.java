@@ -58,14 +58,6 @@ public abstract class EsqScreen implements Screen {
         return innerEventModel;
     }
 
-    public void fireEvent(String eventId) {
-         innerEventModel.fireEvent(eventId);
-    }
-
-    public void fireEvent(String eventId, EsqEvent event) {
-        innerEventModel.fireEvent(eventId, event);
-    }
-
 
     public class InnerEventModel {
         protected Map<String, List<Consumer1<EsqEvent>>> listenersOfEventTypes = new HashMap<>();

@@ -44,7 +44,6 @@ public class EsqGame extends Game {
         Screens.instance.init(this);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Screens.instance.setScreen(LogoScreen.class);
-        Gdx.app.postRunnable(()->Gdx.app.log("Lambda","core work"));
     }
 
     @Override
