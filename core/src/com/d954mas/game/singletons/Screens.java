@@ -1,17 +1,14 @@
 package com.d954mas.game.singletons;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.OrderedMap;
 import com.d954mas.game.EsqGame;
-import com.d954mas.game.screens.LogoScreen;
+import com.d954mas.game.screens.LoadingScreen;
 
 public class Screens {
+    public static final Screens instance=new Screens();
 
 
-    public static Screens instance=new Screens();
     private  OrderedMap<Class<? extends Screen>,Screen> screens;
     private EsqGame game;
     private Screens(){
@@ -19,7 +16,7 @@ public class Screens {
     }
 
     private void createScreens(){
-        screens.put(LogoScreen.class,new LogoScreen());
+        screens.put(LoadingScreen.class,new LoadingScreen());
     }
 
     public void dispose() {
@@ -28,12 +25,20 @@ public class Screens {
         }
     }
 
-    public void init(EsqGame game){
-        if(instance.screens!=null){
-            throw new RuntimeException("Screens must be initialize once");
-        }
+    public void preInit(EsqGame game){
         instance.screens=new OrderedMap<>();
         instance.game=game;
+        LoadingScreen loadingScreen=new LoadingScreen();
+        loadingScreen.getInnerEventModel().addListener("finish_loading",listener->{
+            init();
+            //remove listener later
+            //set default screen menu or something like that
+        });
+        screens.put(LoadingScreen.class,loadingScreen);
+
+    }
+
+    private void init(){
         instance.createScreens();
     }
 
@@ -41,17 +46,4 @@ public class Screens {
     public void setScreen(Class clazz){
         instance.game.setScreen(instance.screens.get(clazz));
     }
-
-    public void setLoadingGroup(){
-        Table loading=new Table();
-        loading.setFillParent(true);
-        //loading.setBackground(new ColorDra);
-        loading.add().expand().fill();
-        EsqGame.getStage().addActor(loading);
-        while (!MathUtils.isEqual(Assets.instance.getManager().getProgress(),1f)){
-            Assets.instance.getManager().update();
-            Gdx.app.log("Screens","reloading openGL resources");
-        }
-    }
-
 }

@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.OrderedMap;
-import com.d954mas.game.screens.LogoScreen;
+import com.d954mas.game.screens.LoadingScreen;
 import com.d954mas.game.services.Service;
 import com.d954mas.game.services.Services;
 import com.d954mas.game.singletons.Assets;
@@ -38,12 +38,12 @@ public class EsqGame extends Game {
         Services.init();
         Assets.instance.init(new AssetManager());
         Assets.instance.preLoad();
-        Screens.instance.init(this);
+        Screens.instance.preInit(this);
         stage=new Stage();
         Gdx.input.setInputProcessor(stage);
         perfomanceLogger=new PerfomanceLogger();;
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        Screens.instance.setScreen(LogoScreen.class);
+        Screens.instance.setScreen(LoadingScreen.class);
     }
 
     @Override
@@ -60,7 +60,10 @@ public class EsqGame extends Game {
 
     @Override
     public void resume() {
-        Gdx.app.debug(this.getClass().getSimpleName(),"resume");
+        Gdx.app.debug(this.getClass().getSimpleName(), "resume");
+        while (!Assets.instance.getManager().update()){
+            Gdx.app.log("EsqGame","reloadin Assets");
+        }
         super.resume();
     }
 
